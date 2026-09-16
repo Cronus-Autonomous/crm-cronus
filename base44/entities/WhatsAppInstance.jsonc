@@ -1,0 +1,46 @@
+{
+  "name": "WhatsAppInstance",
+  "type": "object",
+  "properties": {
+    "instance_name": {
+      "type": "string",
+      "title": "Nome da Inst\u00e2ncia"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "connected",
+        "disconnected",
+        "connecting"
+      ],
+      "title": "Status",
+      "default": "disconnected"
+    },
+    "server_url": {
+      "type": "string",
+      "title": "URL do Servidor"
+    }
+  },
+  "required": [
+    "instance_name",
+    "server_url"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

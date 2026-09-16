@@ -1,0 +1,131 @@
+{
+  "name": "Opportunity",
+  "type": "object",
+  "properties": {
+    "company_name": {
+      "type": "string",
+      "title": "Empresa"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Telefone"
+    },
+    "email": {
+      "type": "string",
+      "title": "E-mail"
+    },
+    "site_url": {
+      "type": "string",
+      "title": "URL do Site"
+    },
+    "has_site": {
+      "type": "boolean",
+      "title": "Possui Site",
+      "default": false
+    },
+    "temperature": {
+      "type": "string",
+      "enum": [
+        "frio",
+        "morno",
+        "quente"
+      ],
+      "title": "Temperatura",
+      "default": "frio"
+    },
+    "value": {
+      "type": "number",
+      "title": "Valor",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "won",
+        "lost"
+      ],
+      "title": "Status",
+      "default": "open"
+    },
+    "stage_id": {
+      "type": "string",
+      "title": "Etapa"
+    },
+    "owner_id": {
+      "type": "string",
+      "title": "Owner"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Observa\u00e7\u00f5es"
+    },
+    "last_fup_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "\u00daltimo Follow-up"
+    }
+  },
+  "required": [
+    "company_name",
+    "phone",
+    "stage_id",
+    "owner_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.owner_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.owner_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.owner_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.owner_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
